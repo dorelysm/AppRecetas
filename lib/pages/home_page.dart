@@ -20,31 +20,28 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('App de recetas'),
         centerTitle: true,
       ),
-
       body: ListView(
-        children: <Widget>[
-          _SwipperTarjeta()
-        ],
+        children: <Widget>[_SwipperTarjeta()],
       ),
     );
   }
 
-  Widget _SwipperTarjeta(){
+  Widget _SwipperTarjeta() {
     return FutureBuilder(
-      future: recetasProviders.getReceta(),
-      builder: (BuildContext context, AsyncSnapshot<List> snapshot){
-        if (snapshot.hasData){
-          return CardSwiper(recetas: snapshot.data as List<ModeloRecetas>);
-        }else{
-          return const CircularProgressIndicator();
-        }
-      }
-    );
+        future: recetasProviders.getReceta(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return CardSwiper(recetas: snapshot.data as List<ModeloRecetas>);
+          } else {
+            return const CircularProgressIndicator();
+          }
+        });
   }
 
-  itemList(image, item){
+  //Sin implementar
+  itemList(image, item) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical:7, horizontal: 5),
+      padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
       child: Card(
         elevation: 5,
         color: Colors.red,
