@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recetas/models/model_recipe.dart';
 import 'package:recetas/providers/categories_provider.dart';
 import 'package:recetas/widgets/Card_Swiper.dart';
 import 'package:recetas/models/model_category.dart';
@@ -13,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late Future<List<ModeloCategoria>> _listaCategorias;
-  final recetasProviders = CategoriasProviders();
+  final categoriasProviders = CategoriasProviders();
 
 
   @override
@@ -30,21 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('App de recetas'),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: _listaCategorias,
-        builder: (context, snapshot){
-          if (snapshot.hasData){
-            print(snapshot.data);
-            return const Text('Hola');
-          } else {
-            print(snapshot.error);
-            return CircularProgressIndicator();
-          }
-        },
-      )
-      //ListView(
-        //children: <Widget>[_SwipperTarjeta()],
-      //),
+      body: ListView(
+          children: <Widget>[
+            const Center(child: Text('Categorias')),
+            _SwipperTarjeta()],
+        ),
     );
   }
 
@@ -59,17 +48,5 @@ class _MyHomePageState extends State<MyHomePage> {
               child: CircularProgressIndicator());
           }
         });
-  }
-
-  //Sin implementar
-  itemList(image, item) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
-      child: Card(
-        elevation: 5,
-        color: Colors.red,
-        child: ListTile(leading: Image(image: image), title: item),
-      ),
-    );
   }
 }

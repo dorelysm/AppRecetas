@@ -2,12 +2,12 @@ import 'package:http/http.dart' as http;
 import 'package:recetas/models/model_recipe.dart';
 import 'dart:convert';
 import 'dart:async';
-/*
-class RecetasProviders {
-  String strCategory = 
-  final url = Uri.parse("https://www.themealdb.com/api/json/v1/1/filter.php?c={$strCategory}");
 
-  Future<List<ModeloCategoria>> getCategories() async {
+class RecetasProviders {
+  //String strCategory = 
+  final url = Uri.parse("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood");
+
+  Future<List<ModeloRecetas>> getRecetas() async {
     final resp = await http.get(url);
 
     //List<ModeloRecetas> recetas = [];
@@ -18,13 +18,12 @@ class RecetasProviders {
 
       final jsonData = jsonDecode(body);
 
-      final categorias = Categorias.fromJsonList(jsonData);
+      final recetas = Recetas.fromJsonList(jsonData);
       
-      return categorias.items;
+      return recetas.items;
     }else{
       throw Exception("Ocurrio Algo ${resp.statusCode}");
     }
 
   }
 }
-*/

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:recetas/pages/home_page.dart';
+import 'package:recetas/pages/page_recipes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/':(context) => const MyHomePage(),
+        '/recetas':(context) => const PageRecipes(),
       },
     );
   }
