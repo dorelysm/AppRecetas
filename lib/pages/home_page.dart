@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recetas/models/model_recipe.dart';
-import 'package:recetas/providers/recetas_provider.dart';
+import 'package:recetas/providers/categories_provider.dart';
 import 'package:recetas/widgets/Card_Swiper.dart';
+import 'package:recetas/models/model_category.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -11,15 +12,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late Future<List<ModeloRecetas>> _listaRecetas;
-  final recetasProviders = RecetasProviders();
+  late Future<List<ModeloCategoria>> _listaCategorias;
+  final recetasProviders = CategoriasProviders();
 
 
   @override
   void initState() {
     super.initState();
-    final getProvider = RecetasProviders();
-    _listaRecetas = getProvider.getReceta();
+    final getProvider = CategoriasProviders();
+    _listaCategorias = getProvider.getCategories();
   }
 
   @override
@@ -30,15 +31,14 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: _listaRecetas,
+        future: _listaCategorias,
         builder: (context, snapshot){
           if (snapshot.hasData){
             print(snapshot.data);
             return const Text('Hola');
-          } else{
-            return const Center(
-              child: Text('error'),
-            );
+          } else {
+            print(snapshot.error);
+            return CircularProgressIndicator();
           }
         },
       )
@@ -50,10 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _SwipperTarjeta() {
     return FutureBuilder(
-        future: _listaRecetas,
+        future: _listaCategorias,
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return CardSwiper(recetas: snapshot.data as List<ModeloRecetas>);
+            return CardSwiper(categorias: snapshot.data as List<ModeloCategoria>);
           } else {
             return const Center(
               child: CircularProgressIndicator());

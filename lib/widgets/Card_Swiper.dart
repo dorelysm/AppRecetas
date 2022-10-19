@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:recetas/models/model_recipe.dart';
+import 'package:recetas/models/model_category.dart';
 
 class CardSwiper extends StatelessWidget{
 
-  final List<ModeloRecetas> recetas;
+  final List<ModeloCategoria> categorias;
 
-  const CardSwiper({Key? key, required this.recetas}) : super(key: key);
+  const CardSwiper({Key? key, required this.categorias}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CardSwiper extends StatelessWidget{
     return Container(
       padding: const EdgeInsets.only(top: 8.0),
       child:  Swiper(
-        itemCount: recetas.length,
+        itemCount: categorias.length,
         layout: SwiperLayout.STACK,
         itemWidth: _screensize.width * 0.7,
         itemHeight: _screensize.height * 0.9,
@@ -24,7 +24,7 @@ class CardSwiper extends StatelessWidget{
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
               placeholder: const AssetImage('assets/no-image.jpg'),
-              image: NetworkImage(recetas[index].getImg()),
+              image: NetworkImage(categorias[index].getImg()),
               fit: BoxFit.cover,
             ),
           );
