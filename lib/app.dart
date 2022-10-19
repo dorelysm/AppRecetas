@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/':(context) => const MyHomePage(),
-        '/recetas':(context) => const PageRecipes(),
+        '/recetas':(context) => PageRecipes(),
+        //CardSwiper.routeName: (context) => const CardSwiper(categorias: [],),
       },
     );
   }

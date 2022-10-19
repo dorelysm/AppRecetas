@@ -12,6 +12,7 @@ class CardSwiper extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final _screensize = MediaQuery.of(context).size;
+    //final args = ModalRoute.of(context)!.settings.arguments as Categorias;
 
     return Container(
       padding: const EdgeInsets.only(top: 8.0),
@@ -34,6 +35,7 @@ class CardSwiper extends StatelessWidget{
                     fit: BoxFit.cover,
                   ),
                   ElevatedButton(onPressed: (){
+                    //_verRecetas(context, categorias[index].strCategory);
                     _verRecetas(context);
                   }, 
                   child: Text('Ver recetas de ${categorias[index].strCategory}'))
@@ -46,8 +48,12 @@ class CardSwiper extends StatelessWidget{
       ),
     );
   }
-
+/*
+  void _verRecetas(BuildContext context, categoria){
+    Navigator.of(context).pushNamed('/recetas', arguments: categoria);
+  }
+  */
   void _verRecetas(BuildContext context){
-    Navigator.pushReplacementNamed(context, '/recetas');
+    Navigator.of(context).pushNamed('/recetas');
   }
 }
