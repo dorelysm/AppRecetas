@@ -9,13 +9,26 @@ class RecetasProviders {
   String _apiKey = "/1";
   String _consulta = "/random.php";
 
+  final url = Uri.parse('www.themealdb.com/api/json/v1/1/filter.php?a=Canadian');
+
   Future<List<ModeloRecetas>> getReceta() async {
-    final url = Uri.parse(_url + _apiKey + _consulta);
+    //final url = Uri.parse(_url + _apiKey + _consulta);
+    
     final resp = await http.get(url);
 
-    final decodeData = json.decode(resp.body);
+    //List<ModeloRecetas> recetas = [];
 
-    final recetas = new Recetas.fromJsonList(decodeData['meals']);
-    return recetas.items;
+    if (resp.statusCode == 200){
+      print(resp.body);
+      String body = utf8.decode(resp.bodyBytes);
+
+      final decodeData = json.decode(body);
+      final recetas = Recetas.fromJsonList(decodeData);
+      
+      return recetas.items;
+    }else{
+      throw Exception("Ocurrio Algo ${resp.statusCode}");
+    }
+
   }
 }

@@ -11,7 +11,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late Future<List<ModeloRecetas>> _listaRecetas;
   final recetasProviders = RecetasProviders();
+
+
+  @override
+  void initState() {
+    super.initState();
+    final getProvider = RecetasProviders();
+    _listaRecetas = getProvider.getReceta();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +29,34 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('App de recetas'),
         centerTitle: true,
       ),
-      body: ListView(
-        children: <Widget>[_SwipperTarjeta()],
-      ),
+      body: FutureBuilder(
+        future: _listaRecetas,
+        builder: (context, snapshot){
+          if (snapshot.hasData){
+            print(snapshot.data);
+            return const Text('Hola');
+          } else{
+            return const Center(
+              child: Text('error'),
+            );
+          }
+        },
+      )
+      //ListView(
+        //children: <Widget>[_SwipperTarjeta()],
+      //),
     );
   }
 
   Widget _SwipperTarjeta() {
     return FutureBuilder(
-        future: recetasProviders.getReceta(),
+        future: _listaRecetas,
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
             return CardSwiper(recetas: snapshot.data as List<ModeloRecetas>);
           } else {
-            return const CircularProgressIndicator();
+            return const Center(
+              child: CircularProgressIndicator());
           }
         });
   }

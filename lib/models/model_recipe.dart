@@ -1,14 +1,12 @@
-import 'dart:convert';
-
 class Recetas {
   List<ModeloRecetas> items = [];
 
   Recetas();
 
-  Recetas.fromJsonList(List<dynamic> jsonList){
+  Recetas.fromJsonList(jsonList){
     if(jsonList == null) return;
-    for (var item in jsonList){
-      final receta = new ModeloRecetas.fromJsonMap(item);
+    for (var item in jsonList['meals']){
+      final receta = ModeloRecetas.fromJsonMap(item);
       items.add(receta);
     }
   }
