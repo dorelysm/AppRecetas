@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:recetas/pages/home_page.dart';
 import 'package:recetas/pages/page_recipes.dart';
+import 'package:recetas/pages/recipe.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/':(context) => const MyHomePage(),
-        '/recetas':(context) => PageRecipes(),
+        '/': (context) => const MyHomePage(),
+        '/recetas': (context) => const PageRecipes(),
+        '/descripcion_receta': (context) => const PageRecipe(),
         //CardSwiper.routeName: (context) => const CardSwiper(categorias: [],),
       },
     );
