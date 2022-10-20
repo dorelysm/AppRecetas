@@ -3,8 +3,7 @@ import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:recetas/models/model_category.dart';
 import 'package:recetas/pages/page_recipes.dart';
 
-class CardSwiper extends StatelessWidget{
-
+class CardSwiper extends StatelessWidget {
   final List<ModeloCategoria> categorias;
 
   const CardSwiper({Key? key, required this.categorias}) : super(key: key);
@@ -16,7 +15,7 @@ class CardSwiper extends StatelessWidget{
 
     return Container(
       padding: const EdgeInsets.only(top: 8.0),
-      child:  Swiper(
+      child: Swiper(
         itemCount: categorias.length,
         layout: SwiperLayout.TINDER,
         itemWidth: _screensize.width * 0.7,
@@ -30,30 +29,32 @@ class CardSwiper extends StatelessWidget{
                 children: [
                   Text(categorias[index].strCategory),
                   FadeInImage(
-                    placeholder: const AssetImage('assets/no-image.jpg'),
+                    placeholder: const AssetImage('assets/no-image.png'),
                     image: NetworkImage(categorias[index].getImg()),
                     fit: BoxFit.cover,
                   ),
-                  ElevatedButton(onPressed: (){
-                    //_verRecetas(context, categorias[index].strCategory);
-                    _verRecetas(context);
-                  }, 
-                  child: Text('Ver recetas de ${categorias[index].strCategory}'))
+                  ElevatedButton(
+                      onPressed: () {
+                        //_verRecetas(context, categorias[index].strCategory);
+                        _verRecetas(context);
+                      },
+                      child: Text(
+                          'Ver recetas de ${categorias[index].strCategory}'))
                 ],
               ),
             ),
           );
         },
-
       ),
     );
   }
+
 /*
   void _verRecetas(BuildContext context, categoria){
     Navigator.of(context).pushNamed('/recetas', arguments: categoria);
   }
   */
-  void _verRecetas(BuildContext context){
+  void _verRecetas(BuildContext context) {
     Navigator.of(context).pushNamed('/recetas');
   }
 }
